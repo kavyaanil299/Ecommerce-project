@@ -21,8 +21,12 @@ const createOrder = async (req,res)=>{
 const getOrders = async (req,res)=>{
   try{
 
-    const orders = await Order.find()
+    if(req.user.role === "admin"){
+      const orders = await Order.find()
+      return res.json(orders)
+    }
 
+    const orders = await Order.find({ user: req.user.id })
     res.json(orders)
 
   }catch(error){
