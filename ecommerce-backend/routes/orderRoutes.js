@@ -5,6 +5,6 @@ const { createOrder, getOrders } = require("../controllers/orderController")
 const { protect, admin } = require("../middleware/authMiddleware")
 
 router.post("/", protect, createOrder)
-router.get("/", protect, admin, getOrders)
+router.get("/", protect, getOrders)
 
 module.exports = router
