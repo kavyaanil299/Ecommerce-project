@@ -1,62 +1,63 @@
-import {Link} from "react-router-dom"
-import {useSelector} from "react-redux"
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../redux/slices/authSlice";
 
-function Navbar(){
+function Navbar() {
+  const cart = useSelector(state => state.cart.cartItems);
+  const { user, token } = useSelector(state => state.auth);
 
-const cart = useSelector(state=>state.cart.cartItems)
+  const dispatch = useDispatch();
 
-return(
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="container">
 
-<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <Link className="navbar-brand" to="/">Ecommerce</Link>
 
-<div className="container">
+        <div className="collapse navbar-collapse">
 
-<Link className="navbar-brand" to="/">Ecommerce</Link>
+          <ul className="navbar-nav ms-auto">
 
-<button className="navbar-toggler"
-data-bs-toggle="collapse"
-data-bs-target="#menu">
+            <li className="nav-item">
+              <Link className="nav-link" to="/">Home</Link>
+            </li>
 
-<span className="navbar-toggler-icon"></span>
+            <li className="nav-item">
+              <Link className="nav-link" to="/cart">
+                Cart ({cart.length})
+              </Link>
+            </li>
 
-</button>
+            <li className="nav-item">
+              <Link className="nav-link" to="/orders">Orders</Link>
+            </li>
 
-<div className="collapse navbar-collapse" id="menu">
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact">Contact</Link>
+            </li>
 
-<ul className="navbar-nav ms-auto">
+            {/* 🔥 LOGIN / LOGOUT FIX */}
+            {token ? (
+              <li className="nav-item">
+                <button
+                  className="btn btn-danger ms-2"
+                  onClick={() => dispatch(logout())}
+                >
+                  Logout
+                </button>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">Login</Link>
+              </li>
+            )}
 
-<li className="nav-item">
-<Link className="nav-link" to="/">Home</Link>
-</li>
+          </ul>
 
-<li className="nav-item">
-<Link className="nav-link" to="/cart">
-Cart ({cart.length})
-</Link>
-</li>
-
-<li className="nav-item">
-<Link className="nav-link" to="/orders">Orders</Link>
-</li>
-
-<li className="nav-item">
-<Link className="nav-link" to="/contact">Contact</Link>
-</li>
-
-<li className="nav-item">
-<Link className="nav-link" to="/login">Login</Link>
-</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</nav>
-
-)
-
+        </div>
+      </div>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

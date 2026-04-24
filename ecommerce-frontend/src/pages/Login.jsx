@@ -20,10 +20,10 @@ const res = await API.post("/auth/login",{email,password})
 
 const {token,user} = res.data
 
-// save token
+
 localStorage.setItem("token",token)
 
-// send correct payload to redux
+
 dispatch(loginSuccess({
   user:user,
   token:token
