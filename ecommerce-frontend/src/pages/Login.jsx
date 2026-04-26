@@ -20,9 +20,7 @@ const res = await API.post("/auth/login",{email,password})
 
 const {token,user} = res.data
 
-
-localStorage.setItem("token",token)
-
+localStorage.setItem("token", token)
 
 dispatch(loginSuccess({
   user:user,
