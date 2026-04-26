@@ -25,9 +25,8 @@ dispatch(setProducts(res.data))
 }
 
 useEffect(()=>{
-loadProducts()
-},[])
-
+  loadProducts()
+},[search, category])
 return(
 
 <div className="container mt-4">

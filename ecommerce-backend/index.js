@@ -15,16 +15,12 @@ const errorHandler = require("./middleware/errorHandler");
 
 const app = express();
 
-/* CORS FIX (IMPORTANT FOR VERCEL + RENDER) */
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173", // local frontend
-      "https://your-vercel-app.vercel.app" // replace with your real Vercel URL
-    ],
-    credentials: true
-  })
-);
+app.use(cors({
+  origin: "https://ecommerce-project-git-main-kavyaanil299s-projects.vercel.app",
+  credentials: true
+}));
+
+
 
 /* BODY PARSER */
 app.use(express.json());
